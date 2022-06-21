@@ -13,9 +13,12 @@ from .views.CommandeLine import CommandeLine
 from .views.configureInterfaceView import ConfigureAccessView, ConfigureTrunkView
 from .views.AssignIpToIrefaceView import AssignIpToIrefaceView
 from .views.GetInterfacesView import GetInterfacesView
+from .views.openprojectview import openprojectview , closeprojetview
 urlpatterns = [
     path('',ProjectsViews.as_view()),
     path('<slug:project_id>',GetProjectWithIdViews.as_view()),
+    path('open/<slug:project_id>',openprojectview.as_view()),
+    path('close/<slug:project_id>',closeprojetview.as_view()),
     path('/link/delete/<slug:project_id>',DeleteLinkView.as_view()),
     path('templates/all',GetExistsTemplates.as_view()),
     path('templates/<slug:template_id>',GetExistsTemplateWithid.as_view()),
