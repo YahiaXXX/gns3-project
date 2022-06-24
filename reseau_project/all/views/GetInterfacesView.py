@@ -21,27 +21,30 @@ class GetInterfacesView(GenericAPIView):
         gns3_server = gns3fy.Gns3Connector("http://localhost:3080")
         links=gns3_server.get_links(project_id=project_id)
         links_summary = gns3fy.Project(project_id=project_id,connector=gns3_server).links_summary(is_print=False)
+        
         list_of_links=[]
         for link in links:
             for i in link["nodes"]:
                 if i["node_id"]==str(node_id):
                     list_of_links.append(i)
+        print(list_of_links)
         list_of_names=[]
         for l in list_of_links:
             list_of_names.append(l["label"]["text"])
+        print(list_of_names)
         gns3_server = gns3fy.Gns3Connector("http://localhost:3080")
         node=gns3_server.get_node(project_id=project_id,node_id=node_id)
         ports=[]
         ports=node["ports"]
         to_delete=[]
-        print(ports)
+        #print(ports)
         for port in ports:
-            for b in list_of_names:
-                if port["short_name"]==b:
-                    print(port["short_name"]+"   "+b)
+            for b in list_of_links:
+                if port["adapter_number"]==b['adapter_number'] and port["port_number"]==b['port_number'] :
+                    #print(port["short_name"]+"   "+b)
                     to_delete.append(port)
-        print(to_delete)
+        #print(to_delete)
         for i in to_delete:
             ports.remove(i)
-        print(ports)
+        #print(ports)
         return Response(data={"data":ports},status=status.HTTP_200_OK)
