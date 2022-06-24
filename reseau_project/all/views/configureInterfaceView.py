@@ -30,7 +30,7 @@ def ConfigureInterfacetrunk(project_id,node_id,interface):
         f.close()
     tn.write(b"enable\r\n")
     tn.write(b"conf t\r\n")
-    c="int "+str(interface)+"\r\n"
+    c="int "+str(interface.replace("e","g"))+"\r\n"
     tn.write(c.encode())
     tn.write(b"switchport mode trunk\r\n")
     tn.write(b"end\r\n")
@@ -65,7 +65,7 @@ def ConfigureInterfaceaccess(project_id,node_id,interface,vlan_number):
     tn.write(b"\r\n")
     tn.write(b"enable\r\n")
     tn.write(b"conf t\r\n")
-    c="int "+str(interface)+"\r\n"
+    c="int "+str(interface.replace("e","g"))+"\r\n"
     tn.write(c.encode())
     tn.write(b"switchport mode access\r\n")
     d="switchport access vlan "+str(vlan_number)+"\r\n"

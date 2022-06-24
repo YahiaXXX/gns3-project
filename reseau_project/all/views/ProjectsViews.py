@@ -51,8 +51,7 @@ class GetProjectWithIdViews(GenericAPIView):
             return Response(data=project,status=status.HTTP_200_OK)
         except:
             return Response(data={"notice":"check the gns3 server"},status=status.HTTP_400_BAD_REQUEST)
-    
-
+            
     def delete(self, request , project_id):
         try:
             gns3_server = gns3fy.Gns3Connector("http://localhost:3080")

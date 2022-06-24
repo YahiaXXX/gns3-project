@@ -38,6 +38,7 @@ class GetInterfacesView(GenericAPIView):
         for port in ports:
             for b in list_of_names:
                 if port["short_name"]==b:
+                    print(port["short_name"]+"   "+b)
                     to_delete.append(port)
         print(to_delete)
         for i in to_delete:

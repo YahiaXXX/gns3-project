@@ -65,7 +65,13 @@ def commandeline(project_id,node_id,commande):
         t=t.split("\r\n")
         
     else:
+        t=t.replace(a,"")
+        t=t.replace("--More-- \b\b\b\b\b\b\b\b\b","")
+        t=t.replace("\b\b\b\b\b\b\b\b\b","")
+        t=t.replace("         ","")
         print(t)
+        t=t[0:t.rfind("0")+4]
+        t=t.split("\r\n")
     tn.close()
     return t
 
