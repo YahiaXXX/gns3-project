@@ -1,5 +1,6 @@
 
 from django.urls import path
+from requests import delete
 
 from all.views.RipconfigView import RipconfigView
 from .views.ProjectsViews import ProjectsViews , GetProjectWithIdViews
@@ -14,7 +15,9 @@ from .views.configureInterfaceView import ConfigureAccessView, ConfigureTrunkVie
 from .views.AssignIpToIrefaceView import AssignIpToIrefaceView
 from .views.GetInterfacesView import GetInterfacesView
 from .views.openprojectview import openprojectview , closeprojetview
+from .views.deletenode import deletenode
 urlpatterns = [
+    path('delete/node/<slug:project_id>/<slug:node_id>',deletenode.as_view()),
     path('',ProjectsViews.as_view()),
     path('<slug:project_id>',GetProjectWithIdViews.as_view()),
     path('open/<slug:project_id>',openprojectview.as_view()),
